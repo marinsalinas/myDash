@@ -2,6 +2,8 @@
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
+var Funnel = require('broccoli-funnel');
+
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     // Add options here
@@ -20,5 +22,37 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  return app.toTree();
+  app.import("bower_components/flat-ui/dist/css/vendor/bootstrap/css/bootstrap.min.css")
+  app.import("bower_components/flat-ui/dist/js/flat-ui.min.js")
+  app.import("bower_components/flat-ui/dist/css/flat-ui.css")
+  app.import("bower_components/flat-ui/dist/css/vendor/bootstrap/fonts/glyphicons-halflings-regular.eot")
+  app.import("bower_components/flat-ui/dist/css/vendor/bootstrap/fonts/glyphicons-halflings-regular.svg")
+  app.import("bower_components/flat-ui/dist/css/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf")
+  app.import("bower_components/flat-ui/dist/css/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff")
+  app.import("bower_components/flat-ui/dist/css/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff2")
+  app.import("bower_components/flat-ui/dist/fonts/glyphicons/flat-ui-icons-regular.eot",{
+    destDir: 'fonts/glyphicons'
+  })
+  app.import("bower_components/flat-ui/dist/fonts/glyphicons/flat-ui-icons-regular.svg",{
+    destDir: 'fonts/glyphicons'
+  })
+  app.import("bower_components/flat-ui/dist/fonts/glyphicons/flat-ui-icons-regular.tff",{
+    destDir: 'fonts/glyphicons'
+  })
+  app.import("bower_components/flat-ui/dist/fonts/glyphicons/flat-ui-icons-regular.woff",{
+    destDir: 'fonts/glyphicons'
+  })
+  app.import("bower_components/flat-ui/dist/fonts/glyphicons/selection.json",{
+    destDir: 'fonts/glyphicons'
+  })
+
+  app.import("bower_components/videojs/dist/video-js/video.js")
+
+  var extraAssets = new Funnel("bower_components/flat-ui/dist/fonts/lato",{
+    srcDir:"/",
+    include: ["**/*.woff", "**/*.eot",'**/*.svg','**/*.ttf'],
+    destDir: 'fonts/lato'
+  })
+
+  return app.toTree(extraAssets)
 };
